@@ -1,12 +1,12 @@
-#include <am.h>
+#include "am.h"
 
 #define TEMPERATURE_AFTER_MIXING 30
 
 typedef struct {
-	int heat_capacity;
-	int temperature;
-	int specific_heat_capacity;
-	int mass;
+	float heat_capacity;
+	float temperature;
+	float specific_heat_capacity;
+	float mass;
 }Element;
 
 
@@ -23,9 +23,14 @@ int main() {
 	metal_sphere.mass = 200;
 	water.specific_heat_capacity = 4.2;
 
-	metal.specific_heat_capacity = (water.specific_heat_capacity * water.mass + container.heat_capacity) * (TEMPERATURE_AFTER_MIXING - water.temperature) / metal.mass * metal_sphere * (metal.specific_heat_capacity - TEMPERATURE_AFTER_MIXING)
+	float a = (water.specific_heat_capacity * water.mass + container.heat_capacity) * (TEMPERATURE_AFTER_MIXING - water.temperature);
+	float b = metal_sphere.mass * (metal_sphere.temperature - TEMPERATURE_AFTER_MIXING);
+
+
+	metal_sphere.specific_heat_capacity = (water.specific_heat_capacity * water.mass + container.heat_capacity) * (TEMPERATURE_AFTER_MIXING - water.temperature) / (metal_sphere.mass * (metal_sphere.temperature - TEMPERATURE_AFTER_MIXING));
 	// equal to below
-	//metal.specific_heat_capacity = (water.specific_heat_capacity * water.mass + container.heat_capacity) * (TEMPERATURE_AFTER_MIXING - container.temperature) / metal.mass * metal_sphere * (metal.specific_heat_capacity - TEMPERATURE_AFTER_MIXING)
-	print
-
-
+	metal_sphere.specific_heat_capacity = (water.specific_heat_capacity * water.mass + container.heat_capacity) * (TEMPERATURE_AFTER_MIXING - container.temperature) / (metal_sphere.mass * (metal_sphere.temperature - TEMPERATURE_AFTER_MIXING));
+	am_printf("%f\n", a);
+	am_printf("%f\n", b);
+	am_printf("%f\n", metal_sphere.specific_heat_capacity);
+}
