@@ -6,6 +6,19 @@ typedef struct {
 	char unit[8];
 }Quantity;
 
+typedef struct {
+	int exp[8];
+	char units[8];
+}Unit;
+
+
+Unit convert_unit(Quantity a)
+
+
+Quantity EPSILON_0 = {8.85e-12, "F/M"}
+Quantity PI = {3.14, ""}
+
+// need to leverage minus exp
 long long power(int base, int exp) {
 	if (exp == 0) 
 		return 1;
@@ -17,9 +30,5 @@ long long power(int base, int exp) {
 	}
 	return result;
 }
-
-
-
-#define EPSILON_0 unit(8.85 * power(10, -12), "F / M")
 
 #endif
